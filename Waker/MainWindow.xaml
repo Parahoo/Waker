@@ -1,32 +1,46 @@
-﻿<Window x:Class="Waker.MainWindow"
+﻿<Window x:Name="window" x:Class="Waker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Waker"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" Height="100" Width="200" Topmost="True" Title="计时器" WindowStyle="None" MouseMove="Window_MouseMove">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <local:ClockControl Width="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}" Margin="5"/>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Margin="5" Content="启动"></Button>
-                <Button Grid.Column="1" Margin="5" Content="暂停"></Button>
-                <Button Grid.Column="2" Margin="5" Content="重置"></Button>
-            </Grid>
-        </Grid>
+        <Grid.Background>
+            <LinearGradientBrush
+                EndPoint="0.673,0.95"
+                StartPoint="0.274,0.137">
+                <GradientStop
+                    Color="#FFFFFFFF"
+                    Offset="0" />
+                <GradientStop
+                    Color="#FFB4C6D8"
+                    Offset="0.982" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <local:ClockControl x:Name="ClockControl" WakeFinished="ClockControl_WakeFinished"/>
+        <Button x:Name="StartBtn" Width="25" Height="{Binding Width, RelativeSource={RelativeSource Self}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Opacity="0.5" Background="{x:Null}" BorderBrush="{x:Null}" Click="StartBtn_Click" ToolTip="开始计时">
+            <Image Source="pack://application:,,,/Resources/start.png"></Image>
+        </Button>
+        <Button x:Name="SysSetBtn" Width="20" Height="{Binding Width, RelativeSource={RelativeSource Self}}" HorizontalAlignment="Right" VerticalAlignment="Top" Opacity="0.5" Background="{x:Null}" BorderBrush="{x:Null}" Click="SysSetBtn_Click" ToolTip="功能">
+            <Image Source="pack://application:,,,/Resources/Preferences.png"></Image>
+        </Button>
+        <Popup x:Name="settingtoolbar" Margin="2" StaysOpen="False" Placement="Relative" PopupAnimation="Scroll" PlacementTarget="{Binding ElementName=SysSetBtn, Mode=OneWay}" AllowsTransparency="True">
+            <StackPanel Width="40">
+                <Button x:Name="RefreshJobBtn" Margin="2" Click="RefreshJobBtn_Click" ToolTip="重置计时">
+                    <Image Source="pack://application:,,,/Resources/refresh.png"></Image>
+                </Button>
+                <Button x:Name="SetJobsBtn" Margin="2" Click="SetJobsBtn_Click">
+                    <Button.ToolTip>
+                        <ListBox x:Name="JobsTooltipListBox" MinWidth="100" MinHeight="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        </ListBox>
+                    </Button.ToolTip>
+                    <Image Source="pack://application:,,,/Resources/setjobs.png"></Image>
+                </Button>
+                <Button x:Name="CloseBtn" Margin="2" Click="CloseBtn_Click" ToolTip="关闭">
+                    <Image Source="pack://application:,,,/Resources/closed.png"></Image>
+                </Button>
+            </StackPanel>
+        </Popup>
     </Grid>
 </Window>

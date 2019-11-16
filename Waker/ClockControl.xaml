@@ -1,13 +1,18 @@
-﻿<UserControl x:Class="Waker.ClockControl"
+﻿<UserControl x:Name="userControl" x:Class="Waker.ClockControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Waker"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400">
+             d:DesignHeight="200" d:DesignWidth="400">
+    <UserControl.Resources>
+        <local:TimeSpanToBrushConverter x:Key="TimeSpanToBrushConverter"/>
+        <local:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"/>
+    </UserControl.Resources>
     <Grid>
-        <Ellipse Fill="#FFCFC296"></Ellipse>
-        <Ellipse Fill="White" Margin="20"></Ellipse>
+        <Viewbox>
+            <Label Padding="2" Content="{Binding RemainTime, Converter={StaticResource TimeSpanToStringConverter}, ElementName=userControl, Mode=OneWay}" FontSize="18" Foreground="{Binding RemainTime, Converter={StaticResource TimeSpanToBrushConverter}, ElementName=userControl, Mode=OneWay}"></Label>
+        </Viewbox>
     </Grid>
 </UserControl>

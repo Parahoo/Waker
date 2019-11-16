@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Waker
 {
     /// <summary>
-    /// WakeListControl.xaml 的交互逻辑
+    /// TimeSpanPicker.xaml 的交互逻辑
     /// </summary>
-    public partial class WakeListControl : UserControl
+    public partial class TimeSpanPicker : UserControl
     {
-        public WakeListControl()
+        public TimeSpanPicker()
         {
             InitializeComponent();
         }
