@@ -69,6 +69,8 @@ namespace Waker
                 if (remain <= TimeSpan.Zero)
                 {
                     TickTimer.Stop();
+                    SoundPlayer.Source = new Uri(@"pack://siteoforigin:,,,/clocksound.mp3");
+                    SoundPlayer.Play();
 
                     RaiseEvent(new RoutedEventArgs(WakeFinishedEvent));
                 }
