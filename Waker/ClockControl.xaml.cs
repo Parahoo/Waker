@@ -48,6 +48,7 @@ namespace Waker
         "WakeFinished", RoutingStrategy.Bubble, typeof(EventHandler), typeof(ClockControl));
 
 
+        int playsoundcount = 0;
         DispatcherTimer TickTimer = new DispatcherTimer();
         public void Start(string wake)
         {
@@ -70,6 +71,7 @@ namespace Waker
                 {
                     TickTimer.Stop();
                     SoundPlayer.Source = new Uri(@"pack://siteoforigin:,,,/clocksound.mp3");
+                    playsoundcount = 3-1;
                     SoundPlayer.Play();
 
                     RaiseEvent(new RoutedEventArgs(WakeFinishedEvent));
@@ -86,6 +88,17 @@ namespace Waker
                 TickTimer.Stop();
 
             RemainTime = TimeSpan.Parse(remain);
+        }
+
+        private void SoundPlayer_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if(playsoundcount > 0)
+            {
+                playsoundcount--;
+                SoundPlayer.Source = new Uri(@"pack://siteoforigin:,,,/clocksound.mp3");
+                SoundPlayer.Play();
+            }
+
         }
     }
 }

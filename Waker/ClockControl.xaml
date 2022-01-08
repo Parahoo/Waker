@@ -14,6 +14,6 @@
         <Viewbox>
             <Label Padding="2" Content="{Binding RemainTime, Converter={StaticResource TimeSpanToStringConverter}, ElementName=userControl, Mode=OneWay}" FontSize="18" Foreground="{Binding RemainTime, Converter={StaticResource TimeSpanToBrushConverter}, ElementName=userControl, Mode=OneWay}"></Label>
         </Viewbox>
-        <MediaElement x:Name="SoundPlayer" Source="pack://application:,,,/Resources/clocksound.wav" LoadedBehavior="Manual"/>
+        <MediaElement x:Name="SoundPlayer" Source="pack://application:,,,/Resources/clocksound.wav" LoadedBehavior="Manual" MediaEnded="SoundPlayer_MediaEnded"/>
     </Grid>
 </UserControl>
